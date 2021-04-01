@@ -1,18 +1,18 @@
 ﻿@using Microsoft.AspNetCore.Routing.Tree
 @using System.Globalization
-@model List<BoatModel>
+@model List<theBoat>
 @{
     ViewData["Title"] = "Prochaine Fermeture";
 
-    List<BoatModel> boats = Model;
+    List<theBoat> boats = Model;
     boats.Sort((s1, s2) => DateTimeOffset.Compare(s1.ClosingDate, s2.ClosingDate));
 
-    BoatModel boat = null;
-    foreach (var boatModel in boats)
+    theBoat boat = null;
+    foreach (var theBoat in boats)
     {
-        if (DateTimeOffset.Compare(DateTimeOffset.Now, boatModel.ClosingDate) < 0)
+        if (DateTimeOffset.Compare(DateTimeOffset.Now, theBoat.ClosingDate) < 0)
         {
-            boat = boatModel;
+            boat = theBoat;
             break;
         }
     }

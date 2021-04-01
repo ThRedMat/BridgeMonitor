@@ -22,13 +22,13 @@ namespace BridgeMonitor.Controllers
 
         public IActionResult Index()
         {
-            List<BoatModel> boats = GetBoats();
+            List<theBoat> boats = GetBoats();
             return View(boats);
         }
 
         public IActionResult All()
         {
-            List<BoatModel> boats = GetBoats();
+            List<theBoat> boats = GetBoats();
             return View(boats);
         }
 
@@ -38,13 +38,13 @@ namespace BridgeMonitor.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        public static List<BoatModel> GetBoats()
+        public static List<theBoat> GetBoats()
         {
             using (var client = new HttpClient())
             {
                 var response = client.GetAsync("https://api.alexandredubois.com/pont-chaban/api.php");
                 var stringResult = response.Result.Content.ReadAsStringAsync();
-                var result = JsonConvert.DeserializeObject<List<BoatModel>>(stringResult.Result);
+                var result = JsonConvert.DeserializeObject<List<theBoat>>(stringResult.Result);
                 return result;
             }
         }

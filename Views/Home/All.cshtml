@@ -1,8 +1,8 @@
-﻿@model List<BoatModel>
+﻿@model List<theBoat>
 @{
     ViewData["Title"] = "Toutes les Fermetures";
 
-    List<BoatModel> boats = Model;
+    List<theBoat> boats = Model;
     boats.Sort((s1, s2) => DateTimeOffset.Compare(s1.ClosingDate, s2.ClosingDate));
 }
 

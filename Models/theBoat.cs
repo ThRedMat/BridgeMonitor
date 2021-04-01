@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BridgeMonitor.Models
 {
-    public class BoatModel
+    public class theBoat
     {
         [JsonProperty("boat_name")]
         public string BoatName { get; set; }

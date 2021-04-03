@@ -23,20 +23,27 @@ namespace BridgeMonitor.Controllers
         public IActionResult Index()
         {
             List<theBoat> boats = GetBoats();
-            return View(boats);
+            boats.Sort((s1, s2) => DateTimeOffset.Compare(s1.ClosingDate, s2.ClosingDate));
+
+            foreach (var theBoat in boats)
+            {
+                if (DateTimeOffset.Compare(DateTimeOffset.Now, theBoat.ClosingDate) < 0)
+                {
+                    ViewData["Boat"] = theBoat;
+                    break;
+                }
+            }
+
+            return View();
         }
 
         public IActionResult All()
         {
-            List<theBoat> boats = GetBoats();
-            return View(boats);
+            ViewData["Boats"] = GetBoats();
+            return View();
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+
 
         public static List<theBoat> GetBoats()
         {
